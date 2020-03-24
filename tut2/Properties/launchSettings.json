@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "tut2": {
+      "commandName": "Project",
+      "commandLineArgs": "res\\data.csv out\\data.xml xml",
+      "workingDirectory": "D:\\PJATK\\sem4\\APBD\\tut2\\tut2\\tut2"
+    }
+  }
+}
