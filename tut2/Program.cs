@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Xml;
 using tut2.models;
+using System.Text.Json;
+using System.Text.Unicode;
+using System.Text.Encodings.Web;
 
 namespace tut2
 {
@@ -97,14 +100,29 @@ namespace tut2
                 }
             }
 
-            /* Write to .xml file */
+            /* Write to a file */
+            Document document = new Document(m_students, m_activeStudies);
+
             if (m_format.Equals("xml"))
             {
-                Document document = new Document(m_students, m_activeStudies);
-
+                /* Write to .xml file */
                 var writer = new FileStream(m_destinationPath, FileMode.Create);
                 var serializer = new XmlSerializer(typeof(Document), new XmlRootAttribute("university"));
                 serializer.Serialize(writer, document);
+            }
+            else if (m_format.Equals("json"))
+            {
+                /* Write to .json file */
+                var jsonOptions = new JsonSerializerOptions 
+                {
+                    WriteIndented = true,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+                };
+
+                var wrapper = new { university = document };
+                string json = JsonSerializer.Serialize(wrapper, jsonOptions);
+
+                File.WriteAllText(m_destinationPath, json);
             }
         }
     }

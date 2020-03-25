@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
 namespace tut2.models
@@ -13,17 +14,17 @@ namespace tut2.models
         public Studies(string name)
         {
             Name = name;
-            NumberOfStudies = 1;
+            NumberOfStudents = 1;
         }
 
-        [XmlAttribute(attributeName: "name")]
+        [XmlAttribute(attributeName: "name")][JsonPropertyName("name")]
         public string Name { get; set; }
-        [XmlAttribute(attributeName: "numberOfStudies")]
-        public int NumberOfStudies { get; set; }
+        [XmlAttribute(attributeName: "numberOfStudents")][JsonPropertyName("numberOfStudents")]
+        public int NumberOfStudents { get; set; }
 
         public static Studies operator++(Studies s)
         {
-            s.NumberOfStudies++;
+            s.NumberOfStudents++;
             return s;
         }
     }

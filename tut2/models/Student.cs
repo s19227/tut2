@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
 namespace tut2.models
@@ -22,7 +23,7 @@ namespace tut2.models
             string fathersName
         )
         {
-            IndexNumber = indexNumber;
+            IndexNumber = "s" + indexNumber;
             FirstName = firstName;
             LastName = lastName;
             Birthdate = birthdate;
@@ -34,15 +35,15 @@ namespace tut2.models
         }
 
 
-        [XmlAttribute(attributeName: "index")]
+        [XmlAttribute(attributeName: "indexNumber")][JsonPropertyName("indexNumber")]
         public string IndexNumber { get; set; }
-        [XmlElement(elementName: "fname")]
+        [XmlElement(elementName: "fname")][JsonPropertyName("fname")]
         public string FirstName { get; set; }
-        [XmlElement(elementName: "lname")]
+        [XmlElement(elementName: "lname")][JsonPropertyName("lname")]
         public string LastName { get; set; }
 
         private string m_birthdate;
-        [XmlElement(elementName: "birthdate")]
+        [XmlElement(elementName: "birthdate")][JsonPropertyName("birthdate")]
         public string Birthdate 
         {
             get
@@ -57,13 +58,13 @@ namespace tut2.models
             }
         }
 
-        [XmlElement(elementName: "email")]
+        [XmlElement(elementName: "email")][JsonPropertyName("email")]
         public string Email { get; set; }
-        [XmlElement(elementName: "mothersName")]
+        [XmlElement(elementName: "mothersName")][JsonPropertyName("mothersName")]
         public string MothersName { get; set; }
-        [XmlElement(elementName: "fathersName")]
+        [XmlElement(elementName: "fathersName")][JsonPropertyName("fathersName")]
         public string FathersName { get; set; }
-        [XmlElement(elementName: "studies")]
+        [XmlElement(elementName: "studies")][JsonPropertyName("studies")]
         public StudiesInfo StudiesData { get; set; }
 
         public override string ToString()
@@ -79,9 +80,9 @@ namespace tut2.models
                 Mode = mode;
             }
 
-            [XmlElement(elementName: "name")]
+            [XmlElement(elementName: "name")][JsonPropertyName("name")]
             public string Name { get; set; }
-            [XmlElement(elementName: "mode")]
+            [XmlElement(elementName: "mode")][JsonPropertyName("mode")]
             public string Mode { get; set; }
         }
     }
